@@ -245,15 +245,14 @@ const Navbar = () => {
         {/* Brand Logo Section */}
         <div
           onClick={() => router.push("/")}
-          className="flex items-center flex-shrink-0 cursor-pointer select-none max-w-[120px] sm:max-w-[180px]"
+          className="relative flex h-[40px] w-[120px] flex-shrink-0 cursor-pointer select-none sm:h-[50px] sm:w-[180px]"
         >
           <Image
             src={logoUrl}
             alt="Khati Bazar"
-            className="object-contain w-full h-auto max-h-[40px] sm:max-h-[50px]"
-            width={180}
-            height={50}
-            style={{ width: "auto", height: "auto" }}
+            fill
+            sizes="(max-width: 640px) 120px, 180px"
+            className="object-contain"
             unoptimized={logoUrl.startsWith("http")}
             priority
           />

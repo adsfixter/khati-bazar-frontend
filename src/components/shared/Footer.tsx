@@ -62,16 +62,17 @@ const Footer = () => {
   {/* Left Section: Logo, Description & Socials */}
   <div className="col-span-2 md:col-span-1 flex flex-col gap-4">
     <div className="flex items-center gap-2">
-      <Image
-        src={settings.logo || logoFallback}
-        alt="Khati Bazar Logo"
-        width={180}
-        height={50}
-        priority
-        className="object-contain max-h-[50px]"
-        style={{ width: "auto", height: "auto" }}
-        unoptimized={Boolean(settings.logo)}
-      />
+      <div className="relative h-[50px] w-[180px]">
+        <Image
+          src={settings.logo || logoFallback}
+          alt="Khati Bazar Logo"
+          fill
+          sizes="180px"
+          priority
+          className="object-contain"
+          unoptimized={Boolean(settings.logo)}
+        />
+      </div>
     </div>
 
     <p className="subtext-large-regular max-w-[240px] text-[#7F8482]">
