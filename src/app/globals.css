@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+@theme {
+  --font-montserrat: "Montserrat Alternates", sans-serif;
+  --font-aeonik: "Aeonik", sans-serif;
+}
+
+/* --- Base Layers --- */
+h1 {
+  @apply font-montserrat font-semibold text-center;
+  font-size: clamp(2.25rem, 5vw + 1rem, 3.5rem); /* 36px to 56px */
+  line-height: 140%;
+  letter-spacing: -0.03em;
+}
+/* h1-এর রেসপন্সিভ পার্ট আলাদা মিডিয়া কুয়েরি বা ডিরেক্ট ক্লাস দিয়ে হ্যান্ডেল করতে হবে */
+@media (min-width: 768px) {
+  h1 {
+    @apply text-left;
+  }
+}
+
+h2 {
+  @apply font-montserrat font-medium italic;
+  font-size: clamp(1.875rem, 4vw + 1rem, 2.75rem); /* 30px to 44px */
+  line-height: 140%;
+  letter-spacing: -0.03em;
+}
+
+h4 {
+  @apply font-montserrat font-semibold;
+  font-size: clamp(1.5rem, 3vw + 0.5rem, 2rem); /* 24px to 32px */
+  line-height: 140%;
+
+  letter-spacing: 0%;
+}
+
+/* --- Custom Typography Utilities --- */
+.body-large-semibold {
+  @apply font-montserrat font-semibold text-[16px] text-center;
+  line-height: 140%;
+  letter-spacing: 0%;
+}
+@media (min-width: 768px) {
+  .body-large-semibold {
+    @apply text-[18px];
+  }
+}
+
+.body-large-medium {
+  @apply font-montserrat font-medium text-[16px];
+  line-height: 140%;
+  letter-spacing: 0%;
+}
+@media (min-width: 768px) {
+  .body-large-medium {
+    @apply text-[18px];
+  }
+}
+
+.title-medium {
+  @apply font-montserrat font-medium text-[20px];
+  line-height: 140%;
+  letter-spacing: 0%;
+}
+@media (min-width: 768px) {
+  .title-medium {
+    @apply text-[24px];
+  }
+}
+
+.body-medium {
+  @apply font-montserrat font-medium text-[15px];
+  line-height: 140%;
+  letter-spacing: 0%;
+}
+@media (min-width: 768px) {
+  .body-medium {
+    @apply text-[16px];
+  }
+}
+
+.body-regular {
+  @apply font-montserrat font-normal text-[15px];
+  line-height: 140%;
+  letter-spacing: 0%;
+}
+@media (min-width: 768px) {
+  .body-regular {
+    @apply text-[16px];
+  }
+}
+
+.subtext-large-medium {
+  @apply font-montserrat font-medium text-[13px];
+  line-height: 140%;
+  letter-spacing: -0.01em;
+}
+@media (min-width: 768px) {
+  .subtext-large-medium {
+    @apply text-[14px];
+  }
+}
+
+.subtext-medium {
+  @apply font-montserrat font-medium text-[12px];
+  line-height: 140%;
+  letter-spacing: 0%;
+}
+
+/* Aeonik Font Utilities */
+.body-sm-regular {
+  @apply font-aeonik font-normal text-[13px];
+  line-height: 150%;
+  letter-spacing: -0.01em;
+}
+@media (min-width: 768px) {
+  .body-sm-regular {
+    @apply text-[14px];
+  }
+}
+
+.subtext-regular {
+  @apply font-montserrat font-normal text-[12px];
+  line-height: 140%;
+  letter-spacing: 0;
+}
+
+@media (min-width: 768px) {
+  .subtext-regular {
+    @apply text-[14px];
+  }
+}
