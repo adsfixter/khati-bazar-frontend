@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-const CheckoutFailPage = () => {
+const CheckoutFailContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const orderId = searchParams.get("orderId");
@@ -69,5 +69,11 @@ const CheckoutFailPage = () => {
     </div>
   );
 };
+
+const CheckoutFailPage = () => (
+  <Suspense fallback={<div className="py-20 text-center text-[#6B6B6B]">Loading...</div>}>
+    <CheckoutFailContent />
+  </Suspense>
+);
 
 export default CheckoutFailPage;

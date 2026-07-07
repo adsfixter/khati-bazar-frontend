@@ -5,12 +5,12 @@
 import React, { useState, useEffect } from "react";
 import { Plus, Pencil, Trash2, Home, Briefcase, Users, MapPin, Loader2 } from "lucide-react";
 import { useAddress } from "@/src/hooks/useAddressData";
-import AddressModal from "./AddressModal";
+import AddressModal, { type FormDataState } from "./AddressModal";
 
 type AddressTypeFilter = "All" | "Home" | "Office" | "Family" | "Others";
 
-const initialFormState = {
-  addressType: "Home" as const,
+const initialFormState: FormDataState = {
+  addressType: "Home",
   fullName: "",
   phone: "",
   email: "",
@@ -45,7 +45,7 @@ export default function SavedAddressesPage() {
   const [activeTab, setActiveTab] = useState<AddressTypeFilter>("All");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [selectedFormData, setSelectedFormData] = useState(initialFormState);
+  const [selectedFormData, setSelectedFormData] = useState<FormDataState>(initialFormState);
 
   // 💡 AlreadySaveAddress এর মতো করে lazy initializer দিয়ে ডাইনামিক টোকেন থেকে userId বের করা
   const [userId] = useState<string | null>(() => {
@@ -118,12 +118,12 @@ export default function SavedAddressesPage() {
       postCode: addr.postCode || "",
       additionalNotes: addr.additionalNotes || "",
       isDefault: addr.isDefault,
-    } as any);
+    });
     setIsEditing(true);
     setIsModalOpen(true);
   };
 
-  const handleModalSubmit = async (formData: typeof initialFormState & { _id?: string }) => {
+  const handleModalSubmit = async (formData: FormDataState) => {
     if (isEditing && formData._id) {
       await updateAddress({ id: formData._id, userId, data: formData });
     } else {
@@ -245,7 +245,7 @@ export default function SavedAddressesPage() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         isEditing={isEditing}
-        initialData={selectedFormData as any}
+        initialData={selectedFormData}
         onSubmit={handleModalSubmit}
       />
     </div>

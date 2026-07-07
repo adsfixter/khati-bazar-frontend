@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { X, Home, Briefcase, Users, MapPin, Loader2 } from "lucide-react";
 
-interface FormDataState {
+export interface FormDataState {
   _id?: string;
   addressType: "Home" | "Office" | "Family" | "Others";
   fullName: string;

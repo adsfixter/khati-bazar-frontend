@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { CartItem } from "@/src/types/checkout.interface";
 
-const CheckoutSuccessPage = () => {
+const CheckoutSuccessContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const orderId = searchParams.get("orderId");
@@ -100,5 +100,11 @@ const CheckoutSuccessPage = () => {
     </div>
   );
 };
+
+const CheckoutSuccessPage = () => (
+  <Suspense fallback={<div className="py-20 text-center text-[#6B6B6B]">Loading...</div>}>
+    <CheckoutSuccessContent />
+  </Suspense>
+);
 
 export default CheckoutSuccessPage;
