@@ -11,6 +11,7 @@ import {
   CheckoutOrderPayload,
 } from "@/src/types/checkout.interface";
 import { getUserAddresses } from "@/src/api/checkout";
+import { API_BASE_URL } from "@/src/config/api";
 
 import Deliveryslot from "@/src/components/Shopnow/Deliveryslot";
 import checkout from "../../../../../public/img/checkout.png";
@@ -197,8 +198,7 @@ const AlreadySaveAddress = () => {
 
     const fetchStocks = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:8080/api/v1";
-        const res = await fetch(`${baseUrl}/products`);
+        const res = await fetch(`${API_BASE_URL}/products`);
         const data = await res.json();
 
         if (!data?.data) return;
@@ -248,9 +248,7 @@ const AlreadySaveAddress = () => {
   const handleRemoveAddress = async (_id: string) => {
     if (!window.confirm("Are you sure you want to remove this address?")) return;
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-      if (!baseUrl) { toast.error("API Base URL is not defined!"); return; }
-      const res = await fetch(`${baseUrl}/addresses/${_id}`, {
+      const res = await fetch(`${API_BASE_URL}/addresses/${_id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

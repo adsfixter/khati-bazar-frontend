@@ -6,6 +6,7 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 
 import { CartItem, CheckoutOrderPayload } from "@/src/types/checkout.interface";
+import { API_BASE_URL } from "@/src/config/api";
 
 import Deliveryslot from "@/src/components/Shopnow/Deliveryslot";
 import {
@@ -196,9 +197,7 @@ const NotSaveAddress = () => {
 
     const fetchStocks = async () => {
       try {
-        const baseUrl =
-          process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:8080/api/v1";
-        const res = await fetch(`${baseUrl}/products`);
+        const res = await fetch(`${API_BASE_URL}/products`);
         const data = await res.json();
 
         if (!data?.data) return;

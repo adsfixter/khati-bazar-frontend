@@ -1,13 +1,12 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+import { API_BASE_URL } from "@/src/config/api";
 
 // 1️⃣ প্রোডাক্টের আইডি দিয়ে সব একটিভ রিভিউ গেট করার হুক
 export const useGetProductReviews = (productId: string) => {
   return useQuery({
     queryKey: ["reviews", "product", productId],
     queryFn: async () => {
-      const res = await fetch(`${BASE_URL}/reviews/product/${productId}`);
+      const res = await fetch(`${API_BASE_URL}/reviews/product/${productId}`);
       if (!res.ok) throw new Error("Failed to fetch reviews");
       const data = await res.json();
       return data.data;
@@ -22,7 +21,7 @@ export const useGetUserReviews = (userId: string) => {
     // queryKey-তে userId থাকায় এটি প্রতিটি ইউজারের জন্য ইউনিক ক্যাশ মেইনটেইন করবে
     queryKey: ["reviews", "user", userId], 
     queryFn: async () => {
-      const res = await fetch(`${BASE_URL}/reviews/user/${userId}`);
+      const res = await fetch(`${API_BASE_URL}/reviews/user/${userId}`);
       if (!res.ok) throw new Error("Failed to fetch user reviews");
       const data = await res.json();
       return data.data; // ব্যাকএন্ডের { success: true, data: [...] } থেকে ডাটা রিটার্ন করছে
@@ -37,7 +36,7 @@ export const useGetUserReviews = (userId: string) => {
 //   const queryClient = useQueryClient();
 //   return useMutation({
 //     mutationFn: async ({ reviewId, formData }: { reviewId: string; formData: FormData }) => {
-//       const res = await fetch(`${BASE_URL}/reviews/${reviewId}`, {
+//       const res = await fetch(`${API_BASE_URL}/reviews/${reviewId}`, {
 //         method: "PATCH", // অথবা আপনার ব্যাকএন্ডের রিকোয়ারমেন্ট অনুযায়ী PUT / PATCH ব্যবহার করুন
 //         body: formData,
 //       });
@@ -56,7 +55,7 @@ export const useGetUserReviews = (userId: string) => {
 //   const queryClient = useQueryClient();
 //   return useMutation({
 //     mutationFn: async (reviewId: string) => {
-//       const res = await fetch(`${BASE_URL}/reviews/${reviewId}`, {
+//       const res = await fetch(`${API_BASE_URL}/reviews/${reviewId}`, {
 //         method: "DELETE",
 //       });
 //       if (!res.ok) throw new Error("Failed to delete review");
@@ -74,7 +73,7 @@ export const useGetUserReviews = (userId: string) => {
 //   const queryClient = useQueryClient();
 //   return useMutation({
 //     mutationFn: async (formData: FormData) => { // এখানে সাধারণ অবজেক্টের বদলে FormData আসবে
-//       const res = await fetch(`${BASE_URL}/reviews`, {
+//       const res = await fetch(`${API_BASE_URL}/reviews`, {
 //         method: "POST",
 //         // ⚠️ লক্ষ্য করুন: এখানে কোনো Content-Type হেডার দেওয়া যাবে না!
 //         body: formData, 
@@ -100,7 +99,7 @@ export const useUpdateReview = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ reviewId, formData }: { reviewId: string; formData: FormData }) => {
-      const res = await fetch(`${BASE_URL}/reviews/${reviewId}`, {
+      const res = await fetch(`${API_BASE_URL}/reviews/${reviewId}`, {
         method: "PATCH",
         body: formData,
       });
@@ -122,7 +121,7 @@ export const useDeleteReview = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (reviewId: string) => {
-      const res = await fetch(`${BASE_URL}/reviews/${reviewId}`, {
+      const res = await fetch(`${API_BASE_URL}/reviews/${reviewId}`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Failed to delete review");
@@ -143,7 +142,7 @@ export const useAddReview = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (formData: FormData) => {
-      const res = await fetch(`${BASE_URL}/reviews`, {
+      const res = await fetch(`${API_BASE_URL}/reviews`, {
         method: "POST",
         body: formData, 
       });

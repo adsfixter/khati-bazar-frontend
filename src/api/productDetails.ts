@@ -2,10 +2,9 @@
 
 import axios from "axios";
 import axiosInstance from "./axiosInstance";
+import { API_BASE_URL } from "@/src/config/api";
 import { IProduct } from "../types/product.interface";
 import { IReview } from "../types/productDetails.interface";
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1";
 
 /**
  * Fetch Single Product Details By ID

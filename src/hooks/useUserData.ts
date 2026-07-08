@@ -1,9 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useState } from 'react';
+import { API_BASE_URL } from '@/src/config/api';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-const API_BASE_URL = `${BASE_URL}/users`;
+const USERS_URL = `${API_BASE_URL}/users`;
 
 // 💡 টোকেন ডিকোড করার হেল্পার ফাংশন (userId এবং এক্সপায়ারি চেক করার জন্য)
 const getUserIdFromToken = (token: string): string | null => {
@@ -45,7 +45,7 @@ export const useUserData = () => {
       if (!token) return null;
       
       try {
-        const res = await axios.get(`${API_BASE_URL}/my-profile`, getAuthHeaders());
+        const res = await axios.get(`${USERS_URL}/my-profile`, getAuthHeaders());
         console.log("🎯 Backend User Data Response:", res.data);
         return res.data;
       } catch (err: any) {
@@ -81,7 +81,7 @@ export const useUserData = () => {
         ? { ...getAuthHeaders().headers, 'Content-Type': 'multipart/form-data' }
         : getAuthHeaders().headers;
 
-      const res = await axios.patch(`${API_BASE_URL}/update-profile`, payload, { headers });
+      const res = await axios.patch(`${USERS_URL}/update-profile`, payload, { headers });
       return res.data;
     },
     onSuccess: () => {
@@ -92,7 +92,7 @@ export const useUserData = () => {
   // পাসওয়ার্ড চেঞ্জ করা
   const changePasswordMutation = useMutation({
     mutationFn: async (payload: Record<string, string>) => {
-      const res = await axios.patch(`${API_BASE_URL}/change-password`, payload, getAuthHeaders());
+      const res = await axios.patch(`${USERS_URL}/change-password`, payload, getAuthHeaders());
       return res.data;
     },
   });
@@ -100,7 +100,7 @@ export const useUserData = () => {
   // সেশন টার্মিনেট
   const terminateSessionMutation = useMutation({
     mutationFn: async (sessionId: string) => {
-      const res = await axios.delete(`${API_BASE_URL}/terminate-session/${sessionId}`, getAuthHeaders());
+      const res = await axios.delete(`${USERS_URL}/terminate-session/${sessionId}`, getAuthHeaders());
       return res.data;
     },
     onSuccess: () => {
@@ -111,7 +111,7 @@ export const useUserData = () => {
   // অ্যাকাউন্ট ডিলিট করা
   const deleteAccountMutation = useMutation({
     mutationFn: async () => {
-      const res = await axios.delete(`${API_BASE_URL}/delete-account`, getAuthHeaders());
+      const res = await axios.delete(`${USERS_URL}/delete-account`, getAuthHeaders());
       return res.data;
     },
   });

@@ -1,26 +1,26 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import { API_BASE_URL } from '@/src/config/api';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:8080/api/v1';
-const API_BASE_URL = `${BASE_URL}/addresses`;
+const ADDRESSES_URL = `${API_BASE_URL}/addresses`;
 
 export const addressApi = {
   getMyAddresses: async (userId: string) => {
     if (!userId) return [];
-    const res = await axios.get(`${API_BASE_URL}/${userId}`);
+    const res = await axios.get(`${ADDRESSES_URL}/${userId}`);
     return res.data?.data || [];
   },
   createAddress: async (data: any) => {
-    const res = await axios.post(API_BASE_URL, data);
+    const res = await axios.post(ADDRESSES_URL, data);
     return res.data;
   },
   updateAddress: async ({ id, userId, data }: { id: string; userId: string; data: any }) => {
-    const res = await axios.patch(`${API_BASE_URL}/${id}`, { ...data, userId });
+    const res = await axios.patch(`${ADDRESSES_URL}/${id}`, { ...data, userId });
     return res.data;
   },
   deleteAddress: async (id: string) => {
-    const res = await axios.delete(`${API_BASE_URL}/${id}`);
+    const res = await axios.delete(`${ADDRESSES_URL}/${id}`);
     return res.data;
   },
 };

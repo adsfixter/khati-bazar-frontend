@@ -1,13 +1,11 @@
 import axiosInstance from "@/src/api/axiosInstance";
+import { API_BASE_URL } from "@/src/config/api";
 import {
   DBPaymentMethod,
   IAddress,
   IAddressUpdatePayload,
   IOrderPayload,
 } from "../types/check.interface";
-
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1";
 
 export const getUserAddresses = async (userId: string): Promise<IAddress[]> => {
   try {

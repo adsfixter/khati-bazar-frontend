@@ -1,36 +1,35 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import { API_BASE_URL } from '@/src/config/api';
 
-// 💡 এনভায়রনমেন্ট ভ্যারিয়েবল যদি কোনো কারণে মিসিং হয়, তবে সরাসরি আপনার ব্যাকএন্ড পোর্ট ফলব্যাক হিসেবে কাজ করবে
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-const API_BASE_URL = `${BASE_URL}/wishlists`;
+const WISHLISTS_URL = `${API_BASE_URL}/wishlists`;
 
 // API Methods
 export const wishlistApi = {
   // নির্দিষ্ট ইউজারের উইশলিস্ট ডাটা নিয়ে আসা
   getMyWishlist: async (userId: string) => {
     if (!userId) return null;
-    const res = await axios.get(`${API_BASE_URL}/${userId}`);
+    const res = await axios.get(`${WISHLISTS_URL}/${userId}`);
     // ব্যাকএন্ড যদি সরাসরি অবজেক্ট দেয় অথবা রেসপন্সের ডাটার ভেতর ডাটা (.data.data) পাঠায়
     return res.data?.data || res.data;
   },
 
   // প্রোডাক্ট উইশলিস্টে যোগ/বিয়োগ করা (Toggle)
   toggleWishlist: async ({ userId, productId }: { userId: string; productId: string }) => {
-    const res = await axios.post(`${API_BASE_URL}/toggle`, { userId, productId });
+    const res = await axios.post(`${WISHLISTS_URL}/toggle`, { userId, productId });
     return res.data;
   },
 
   // উইশলিস্ট থেকে নির্দিষ্ট একটি প্রোডাক্ট ডিলিট করা
   removeSingleItem: async ({ userId, productId }: { userId: string; productId: string }) => {
-    const res = await axios.patch(`${API_BASE_URL}/remove-item`, { userId, productId });
+    const res = await axios.patch(`${WISHLISTS_URL}/remove-item`, { userId, productId });
     return res.data;
   },
 
   // পুরো উইশলিস্ট এক ক্লিকে খালি করা
   clearWishlist: async (userId: string) => {
-    const res = await axios.delete(`${API_BASE_URL}/clear/${userId}`);
+    const res = await axios.delete(`${WISHLISTS_URL}/clear/${userId}`);
     return res.data;
   }
 };

@@ -1,4 +1,5 @@
 import axiosInstance from "@/src/api/axiosInstance";
+import { API_BASE_URL } from "@/src/config/api";
 import { ICoupon } from "@/src/types/cart.interface";
 import { DBPaymentMethod, IAddressPayload, IOrderPayload } from "../types/check.interface";
 
@@ -28,8 +29,6 @@ export const checkUserAddress = async (userId: string): Promise<boolean> => {
 };
 
 
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1";
 
 // ১. একটিভ পেমেন্ট মেথডগুলো নিয়ে আসা
 export const getActivePaymentMethods = async (): Promise<DBPaymentMethod[]> => {

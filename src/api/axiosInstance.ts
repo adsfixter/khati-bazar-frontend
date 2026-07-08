@@ -1,8 +1,9 @@
 import axios, { InternalAxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+import { API_BASE_URL } from '@/src/config/api';
 
 // ১. এক্সিওস ইনস্ট্যান্স তৈরি এবং বেস ইউআরএল সেটআপ
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api/v1', 
+  baseURL: API_BASE_URL,
   timeout: 10000, 
   headers: {
     'Content-Type': 'application/json',
